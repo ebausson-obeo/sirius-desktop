@@ -1709,6 +1709,8 @@ public abstract class AbstractSiriusSwtBotGefTestCase extends SWTBotGefTestCase 
             setWarningCatchActive(false);
 
             crossRefDetector.assertNoCrossReferenceAdapterFound();
+            // Reset default exception handler (to avoid a memory leak)
+            Thread.setDefaultUncaughtExceptionHandler(null);
             checkLogs();
         }
 

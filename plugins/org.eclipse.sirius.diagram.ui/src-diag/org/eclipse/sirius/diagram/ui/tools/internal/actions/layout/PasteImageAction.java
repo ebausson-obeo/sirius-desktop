@@ -100,9 +100,11 @@ public class PasteImageAction extends Action implements IDisposableAction {
 
     @Override
     public void dispose() {
-        awtClipboard.removeFlavorListener(clipboardListener);
+        if (awtClipboard != null) {
+            awtClipboard.removeFlavorListener(clipboardListener);
+            awtClipboard = null;
+            }
         clipboardListener = null;
-        awtClipboard = null;
         changeListenerOpt.ifPresent(changeListener -> {
             this.removePropertyChangeListener(changeListener);
         });
